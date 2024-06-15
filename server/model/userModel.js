@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    age: {
+        type: String,
+        required: true
+    },
 });
  
 const UserModels = mongoose.model("users",userSchema);
