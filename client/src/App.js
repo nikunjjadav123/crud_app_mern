@@ -3,6 +3,7 @@ import './App.css';
 import {RouterProvider, createBrowserRouter,Router , Route} from "react-router-dom";
 import User from "./components/user.jsx";
 import Add from "./components/addUser.jsx";
+import EventHandling from './components/EventHandling.jsx';
 function App() {
 
   const route = createBrowserRouter([
@@ -21,6 +22,10 @@ function App() {
     {
       path:"/delete",
       element:"User Delete Page",
+    },
+    {
+      path:"/event-handling",
+      element:<EventHandling/>,
     }
 
   ]); 
