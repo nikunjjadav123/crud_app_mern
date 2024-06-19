@@ -4,9 +4,10 @@ import {RouterProvider, createBrowserRouter,Router , Route} from "react-router-d
 import User from "./components/user.jsx";
 import Add from "./components/addUser.jsx";
 import EventHandling from './components/EventHandling.jsx';
+import Layout from './components/Layout.jsx';
 
 function App() {
-
+  
   const route = createBrowserRouter([
     {
       path:"/",
@@ -33,6 +34,7 @@ function App() {
 
   return (
     <div className="App">
+      <Layout />
       <RouterProvider router={route}>
 
       </RouterProvider>
