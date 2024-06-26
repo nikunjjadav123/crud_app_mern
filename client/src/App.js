@@ -3,7 +3,7 @@ import './App.css';
 import {RouterProvider, createBrowserRouter,Router , Route} from "react-router-dom";
 import User from "./components/user.jsx";
 import Add from "./components/addUser.jsx";
-import EventHandling from './components/EventHandling.jsx';
+import DerivedState from './components/DerivedState.jsx';
 import Layout from './components/Layout.jsx';
 
 function App() {
@@ -26,8 +26,8 @@ function App() {
       element:"User Delete Page",
     },
     {
-      path:"/event-handling",
-      element:<EventHandling/>,
+      path:"/derived-state",
+      element:<DerivedState/>,
     }
 
   ]); 
