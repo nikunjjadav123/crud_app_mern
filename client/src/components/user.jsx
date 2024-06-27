@@ -1,39 +1,67 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
+import axios from "axios";
 import {Link} from "react-router-dom";
 import styles from "./css/user.module.css";
+import Table from 'react-bootstrap/Table'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const User = () => {
+
+    const [data,setData] = useState([]);
+
+    useEffect(()=>{
+        async function FetchData(){
+            try{
+                const fetchUser = await axios.get('http://localhost:9000/api/all');
+                const response = fetchUser.data;
+                setData(response);
+            }catch(error){
+
+            }
+        }
+        FetchData();
+    },[]);
+
     return (
         <>
-            <h1 className="text-[30px]">USERS</h1>
             
-            <div class={styles.userTable}>
-                <Link to={"/add"} class={styles.addButton}>Add User</Link>
-                <table className="border-collapse border border-slate-500">
+                <div class={styles.userTable}>
+                <Link to={"/add"} class={styles.addButton}>
+                Add User</Link><br/><br/>
+                <h1 className="text-[30px] text-red-900">ALL REGISTERED USERS</h1>
+                <Table striped bordered hover className={styles.userTable}>
                     <thead>
                         <tr>
-                            <th className="border border-slate-600">User Id</th>
-                            <th className="border border-slate-600">First Name</th>
-                            <th className="border border-slate-600">Last Name</th>
-                            <th className="border border-slate-600">Email</th>
-                            <th className="border border-slate-600">Age</th>
-                            <th className="border border-slate-600">Actions</th>
+                            <th>#</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Age</th>
+                            <th>City</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td className="border border-slate-600 text-center">sdasda</td>
-                            <td className="border border-slate-600 text-center">sdds</td>
-                            <td className="border border-slate-600 text-center">ada</td>
-                            <td className="border border-slate-600 text-center">SAAS</td>
-                            <td className="border border-slate-600 text-center">SASDA</td>
-                            <td className="border border-slate-600 text-center">
-                                <Link to={"/edit"} className={styles.editButton}><i class="fa-solid fa-edit"></i></Link>
-                                <button className={styles.deleteButton}><i class="fa-solid fa-trash"></i></button>
-                            </td>
-                        </tr>
+                       {data.map((elem,index)=>{
+                            return (
+                                <tr>
+                                    <td>{elem._id}</td>
+                                    <td>{elem.fname}</td>
+                                    <td>{elem.lname}</td>
+                                    <td>{elem.email}</td>
+                                    <td>{elem.age}</td>
+                                    <td>{elem.city}</td>
+                                    <td>
+                                        <Link to={'/edit'}><i className="fa fa-edit"></i></Link>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <button><i class="fa fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            )
+                       })}
+                        
                     </tbody>
-                </table>
-            </div>
+                </Table>
+                </div>
         </>
     )
 }

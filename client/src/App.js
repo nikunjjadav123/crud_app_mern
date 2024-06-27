@@ -5,6 +5,7 @@ import User from "./components/user.jsx";
 import Add from "./components/addUser.jsx";
 import DerivedState from './components/DerivedState.jsx';
 import Layout from './components/Layout.jsx';
+import EditUser from "./components/editUser.jsx";
 
 function App() {
   
@@ -19,7 +20,7 @@ function App() {
     },
     {
       path:"/edit",
-      element:"User Update Page",
+      element:<EditUser/>,
     },
     {
       path:"/delete",
