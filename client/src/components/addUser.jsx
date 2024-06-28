@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import styles from "./css/addUser.module.css";
-import {Link} from "react-router-dom";
-import Table from 'react-bootstrap/Table'
+import {Link, useNavigate} from "react-router-dom";
+import Table from 'react-bootstrap/Table';
+import toast,{Toaster} from 'react-hot-toast';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -17,6 +18,7 @@ const Add = () => {
         password : "",
     }
     const [user,setUser] = useState(users);
+    const navigate = useNavigate();
     const inputHandler = (e) => {
         const {name,value} = e.target;
         setUser({...user, [name]:value});
@@ -26,13 +28,15 @@ const Add = () => {
     const submitForm = async(e) => {
         e.preventDefault();
         await axios.post("http://localhost:9000/api/create",user).then((response)=>{
-            alert("New User Added");
+            toast.success(response.data.msg,{position:"top-right"});
+            navigate("/");
 
         }).catch(error=>console.log("error"));
     }
 
     return (
         <>
+             <Toaster />
             <div class={styles.addUser}>
                 <Link to={"/"} class={styles.backButton}>Back</Link><br/><br/>
                 <h1 className="text-[30px] text-red-900">ADD NEW USER</h1>
